@@ -1,0 +1,42 @@
+.stats {
+  width: 100%;
+  margin: 0 auto;
+  padding: 20px 50px;
+  color: #fff;
+  font-size: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &__restart {
+    width: 200px;
+  }
+  svg {
+    position: absolute;
+    left: 150px;
+    top: 60px;
+  }
+  p {
+    display: block;
+
+    span {
+      text-transform: uppercase;
+      color: rgb(111, 169, 226);
+    }
+  }
+  p + p {
+    margin-left: 20px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .stats {
+    font-size: 1.5rem;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .stats {
+    font-size: 1.2rem;
+  }
+}

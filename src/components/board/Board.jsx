@@ -3,6 +3,7 @@ import { Context } from "../context";
 import "./board.scss";
 import { card } from "../db";
 import { shuffle } from "lodash";
+import { Header } from "../components";
 
 function Board() {
   let [
@@ -18,6 +19,12 @@ function Board() {
     setTimerReset,
     leaderBoard,
     setLeaderBoard,
+    minutes,
+    setMinutes,
+    seconds,
+    setSeconds,
+    reset,
+    setReset,
   ] = useContext(Context);
 
   const [cards, setCards] = useState(shuffle([...card, ...card]));
@@ -26,6 +33,10 @@ function Board() {
   const [activeCards, setActiveCards] = useState([]);
   const [foundPairs, setFoundPairs] = useState([]);
   let users;
+
+  useEffect(() => {
+    restart();
+  }, [startGame]);
 
   function restart() {
     setCards(shuffle([...card, ...card]));
@@ -40,6 +51,7 @@ function Board() {
     localStorage.setItem("users", JSON.stringify([]));
   }
   users = JSON.parse(localStorage.getItem("users"));
+  let userscore = Math.trunc(clicks / 2) * (minutes * 60 + seconds);
 
   function collectUsers() {
     if (users.findIndex((user) => user.username === username) >= 0) {
@@ -51,6 +63,7 @@ function Board() {
           username: username,
           usermove: Math.trunc(clicks / 2),
           usertime: timer,
+          userscore: userscore,
         };
         localStorage.setItem("users", JSON.stringify(users));
       }
@@ -62,6 +75,7 @@ function Board() {
         username: username,
         usermove: Math.trunc(clicks / 2),
         usertime: timer,
+        userscore: userscore,
       });
       localStorage.setItem("users", JSON.stringify(users));
     }
@@ -84,7 +98,7 @@ function Board() {
           clearInterval(timeInterval);
           collectUsers();
         }
-        // firstIndex.style = "opacity:0";
+
         setFoundPairs([...foundPairs, firstIndex, secondsIndex]);
       }
       setActiveCards([...activeCards, index]);
@@ -96,16 +110,15 @@ function Board() {
 
   return (
     <div className="board ">
-      <div className="stats">
-        <p>Player: {username}</p>
-        <p>Moves: {Math.trunc(clicks / 2)}</p>
-        <p className="stats__timer" value="sdf">
-          {timer}
-        </p>
-        <p className="stats__restart" onClick={restart}>
-          Restart
-        </p>
-      </div>
+      <Header
+        username={username}
+        clicks={clicks}
+        timer={timer}
+        userscore={userscore}
+        setStartGame={setStartGame}
+        restart={restart}
+      />
+
       <div className="board__inner">
         {cards.map((card, index) => {
           const flippedToFront =
@@ -117,7 +130,11 @@ function Board() {
               onClick={() => flipCard(index)}
               key={card + index}
             >
-              <div className="card">
+              <div
+                className={"card " + (flippedToFront ? "flipped" : "")}
+                onClick={() => flipCard(index)}
+                key={card + index}
+              >
                 <div className="front">
                   <img src={card.img} alt="" />
                 </div>
@@ -130,22 +147,23 @@ function Board() {
       <div className={won || leaderBoard ? "window window-visable" : "window"}>
         {won && (
           <>
-            You won!
-            <br />
-            Your moves:{Math.trunc(clicks / 2)}
-            <br />
-            Your time:{timer}
-            <br />
+            <h2>You won, {username}!</h2>
+
+            <p>Your moves:&nbsp; {Math.trunc(clicks / 2)}</p>
+
+            <p>Your time:&nbsp;{timer}</p>
+
             <p
+              className="window-button"
               onClick={() => {
                 restart();
               }}
             >
-              restart
+              Restart
             </p>
-            <br />
-            <br />
+
             <p
+              className="window-button"
               onClick={(e) => {
                 setLeaderBoard(true);
                 setWon(false);
@@ -157,22 +175,30 @@ function Board() {
         )}
         {leaderBoard && (
           <>
-            Leaders
-            <table>
-              <tr>
-                <th>Username</th>
-                <th>Move</th>
-                <th>Time</th>
-              </tr>
-              {users.map((item) => {
-                return (
-                  <tr>
-                    <td>{item.username}</td>
-                    <td>{item.usermove}</td>
-                    <td>{item.usertime}</td>
-                  </tr>
-                );
-              })}
+            <h2>Leaders</h2>
+            <table className="window__leaderboard">
+              <thead>
+                <tr>
+                  <th>Username</th>
+                  <th>Move</th>
+                  <th>Time</th>
+                  <th>Score</th>
+                </tr>
+              </thead>
+              <tbody>
+                {users
+                  .sort((a, b) => a.userscore - b.userscore)
+                  .map((item, id) => {
+                    return (
+                      <tr key={item + id}>
+                        <td>{item.username}</td>
+                        <td>{item.usermove}</td>
+                        <td>{item.usertime}</td>
+                        <td>{item.userscore}</td>
+                      </tr>
+                    );
+                  })}
+              </tbody>
             </table>
             <svg
               className={leaderBoard ? "window__close" : "window__close-hidden"}

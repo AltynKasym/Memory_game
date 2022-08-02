@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import "./login.scss";
 import { Context } from "../context";
 import { logoImage } from "../../images/cards.png";
@@ -17,6 +17,10 @@ function Login() {
     setTimerReset,
     leaderBoard,
     setLeaderBoard,
+    minutes,
+    setMinutes,
+    seconds,
+    setSeconds,
   ] = useContext(Context);
 
   function getUsername(e) {
@@ -24,9 +28,8 @@ function Login() {
   }
 
   let timing = timer.split(":");
-  let minutes = timing[0];
-  let seconds = timing[1];
-  console.log("timer", timing);
+  setMinutes(timing[0]);
+  setSeconds(timing[1]);
   function startTimer() {
     setTimeInterval(
       setInterval(() => {
@@ -43,9 +46,13 @@ function Login() {
     );
   }
 
-  if (timerReset) {
-    clearInterval(timeInterval);
-  }
+    // useEffect(() => {
+    //   clearInterval(timeInterval);
+    //   startTimer();
+    // }, []);
+  // if (timerReset) {
+  //   clearInterval(timeInterval);
+  // }
 
   function gameStart(e) {
     e.preventDefault();
@@ -62,7 +69,7 @@ function Login() {
       className="login"
       style={startGame ? { display: "none" } : { display: "flex" }}
     >
-      <img src="../images/cards.png" alt="logo" />
+      {/* <img src="../images/cards.png" alt="logo" /> */}
       <h2 className="login-title">Memory Game</h2>
       <form className="login__form">
         <input
@@ -77,7 +84,7 @@ function Login() {
         />
         <input
           type="submit"
-          className="login__form-submit"
+          className="window-button"
           value="Play"
           onClick={(e) => {
             gameStart(e);
@@ -86,7 +93,7 @@ function Login() {
       </form>
 
       <p
-        className="login__leaderBoard"
+        className="login__leaderBoard window-button"
         onClick={(e) => {
           setLeaderBoard(true);
         }}

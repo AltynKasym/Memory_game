@@ -40,7 +40,14 @@
   width: 50%;
   margin: 0 auto;
   border: none;
+  background-color: rgb(27, 82, 155);
+  padding: 5px 20px;
+  width: 200px;
+  margin: 0 auto;
+  font-size: 24px;
+  border-radius: 5px;
+  color: antiquewhite;
 }
 .login__leaderBoard {
-  margin-top: 100px;
+  margin-top: 50px;
 }

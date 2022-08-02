@@ -10,6 +10,9 @@ function App() {
   let [timer, setTimer] = useState("0:00");
   let [timerReset, setTimerReset] = useState(false);
   let [leaderBoard, setLeaderBoard] = useState(false);
+  let [minutes, setMinutes] = useState(0);
+  let [seconds, setSeconds] = useState(0);
+  const [reset, setReset] = useState(null);
 
   return (
     <div className="App">
@@ -27,6 +30,10 @@ function App() {
           setTimerReset,
           leaderBoard,
           setLeaderBoard,
+          minutes,
+          setMinutes,
+          seconds,
+          setSeconds,
         ]}
       >
         <Login />
