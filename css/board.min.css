@@ -1,16 +1,17 @@
 .board {
   height: 100vh;
-  max-width: 1400px;
   margin: 0 auto;
   z-index: -2;
 }
 .board__inner {
-  height: 63vh;
-  width: 75vw;
-  margin: auto auto;
+  width: 60%;
+  margin: 0 auto;
   display: grid;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   grid-template-columns: repeat(8, 1fr);
-  grid-gap: 5px;
+  grid-gap: 7px;
 }
 .board__active {
   margin-top: -100vh;
@@ -26,16 +27,11 @@
   fill: #468;
 }
 
-.card-outer {
-  -webkit-perspective: 1000px;
-          perspective: 1000px;
-}
-
 .card {
   border-radius: 5px;
   position: relative;
-  width: 130px;
-  height: 130px;
+  width: 100px;
+  height: 100px;
   -webkit-transform: rotateY(180deg);
           transform: rotateY(180deg);
   -webkit-transform-style: preserve-3d;
@@ -48,8 +44,8 @@
 .card .front,
 .card .back {
   position: absolute;
-  width: 130px;
-  height: 130px;
+  width: 100px;
+  height: 100px;
   -webkit-backface-visibility: hidden;
           backface-visibility: hidden;
   display: -webkit-box;
@@ -69,7 +65,7 @@
   display: -ms-flexbox;
   display: flex;
   max-width: 100%;
-  height: 100px;
+  height: 90%;
 }
 
 .card .back {
@@ -84,45 +80,9 @@
   background-color: #fff;
 }
 
-.stats {
-  width: 80%;
-  margin: 0 auto;
-  text-align: center;
-  color: #fff;
-  padding: 20px 0;
-  font-size: 2rem;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-}
-.stats__restart {
-  width: 200px;
-}
-.stats svg {
-  position: absolute;
-  left: 150px;
-  top: 60px;
-}
-.stats p {
-  display: block;
-}
-.stats p span {
-  text-transform: uppercase;
-  color: rgb(111, 169, 226);
-}
-.stats p + p {
-  margin-left: 20px;
-}
-
 .window {
-  width: 50%;
-  min-height: 50%;
+  width: 60%;
+  min-height: 40%;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -149,8 +109,15 @@
 }
 .window__leaderboard {
   font-size: 20px;
-  width: 80%;
+  width: 90%;
   margin: 0 auto;
+}
+.window__leaderboard th {
+  padding-bottom: 5px;
+}
+.window h2 {
+  margin: 0;
+  padding-bottom: 10px;
 }
 .window p {
   font-size: 20px;
@@ -176,4 +143,117 @@
   -webkit-transform: scale(1.1);
       -ms-transform: scale(1.1);
           transform: scale(1.1);
+}
+
+@media screen and (max-width: 1000px) {
+  .board__inner {
+    grid-template-columns: repeat(6, 1fr);
+  }
+  .window {
+    width: 70%;
+  }
+  .window__leaderboard {
+    font-size: 18px;
+    width: 98%;
+  }
+}
+@media screen and (max-width: 800px) {
+  .board__inner {
+    width: 50%;
+    grid-template-columns: repeat(4, 1fr);
+  }
+  .window {
+    width: 80%;
+  }
+  .window__leaderboard {
+    font-size: 18px;
+    width: 98%;
+    margin: 0 auto;
+  }
+  .window p {
+    font-size: 20px;
+  }
+  .window-button {
+    padding: 5px 20px;
+    width: 220px;
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+}
+@media screen and (max-width: 600px) {
+  .board__inner {
+    width: 50%;
+    grid-template-columns: repeat(4, 1fr);
+  }
+  .card {
+    width: 80px;
+    height: 80px;
+  }
+  .card .front,
+.card .back {
+    width: 80px;
+    height: 80px;
+  }
+  .card .front img {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    max-width: 100%;
+    height: 70%;
+  }
+  .window {
+    width: 85%;
+  }
+  .window__leaderboard {
+    font-size: 16px;
+    width: 99.5%;
+    margin: 0 auto;
+  }
+  .window h2 {
+    font-size: 21px;
+  }
+  .window p {
+    font-size: 16px;
+  }
+  .window-button {
+    padding: 5px 20px;
+    width: 220px;
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+}
+@media screen and (max-width: 470px) {
+  .board__inner {
+    width: 50%;
+    grid-template-columns: repeat(4, 1fr);
+  }
+  .card {
+    width: 60px;
+    height: 60px;
+  }
+  .card .front,
+.card .back {
+    width: 60px;
+    height: 60px;
+  }
+  .window {
+    width: 85%;
+  }
+  .window__leaderboard {
+    font-size: 14px;
+    width: 99.5%;
+    margin: 0 auto;
+  }
+  .window h2 {
+    font-size: 21px;
+  }
+  .window p {
+    font-size: 16px;
+  }
+  .window-button {
+    padding: 5px 20px;
+    width: 220px;
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
 }

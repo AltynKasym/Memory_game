@@ -19,18 +19,23 @@ function Header({ username, clicks, timer, userscore, setStartGame, restart }) {
           fill="#f7f7f7"
         />
       </svg>
-      <p>
-        Player: <span>{username}</span>
-      </p>
-      <p>
-        Moves: <span> {Math.trunc(clicks / 2)}</span>
-      </p>
-      <p className="stats__timer" value="sdf">
-        {timer}
-      </p>
-      <p>
-        Score: <span>{userscore}</span>
-      </p>
+      <div className="stats-username">
+        <p>
+          Player: <span>{username}</span>
+        </p>
+      </div>
+      <div className="stats-info">
+        <p>
+          Moves: <span> {Math.trunc(clicks / 2)}</span>
+        </p>
+        <p className="stats__timer" value="sdf">
+          {timer}
+        </p>
+        <p>
+          Score: <span>{userscore}</span>
+        </p>
+      </div>
+
       {/* <p className="stats__restart" onClick={restart}>
         Restart
       </p> */}

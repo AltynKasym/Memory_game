@@ -17,7 +17,8 @@
     top: 60px;
   }
   p {
-    display: block;
+    // padding: 0;
+    margin: 15px 10px;
 
     span {
       text-transform: uppercase;
@@ -27,8 +28,23 @@
   p + p {
     margin-left: 20px;
   }
+  &__timer {
+    min-width: 100px;
+  }
+
+  &-info {
+    display: flex;
+    margin-left: 20px;
+    padding: 0;
+    margin: 0;
+  }
 }
 
+@media screen and (max-width: 800px) {
+  .stats {
+    flex-direction: column;
+  }
+}
 @media screen and (max-width: 600px) {
   .stats {
     font-size: 1.5rem;

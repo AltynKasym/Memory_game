@@ -1,0 +1,64 @@
+.stats {
+  width: 100%;
+  margin: 0 auto;
+  padding: 20px 50px;
+  color: #fff;
+  font-size: 2rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+.stats__restart {
+  width: 200px;
+}
+.stats svg {
+  position: absolute;
+  left: 150px;
+  top: 60px;
+}
+.stats p {
+  margin: 15px 10px;
+}
+.stats p span {
+  text-transform: uppercase;
+  color: rgb(111, 169, 226);
+}
+.stats p + p {
+  margin-left: 20px;
+}
+.stats__timer {
+  min-width: 100px;
+}
+.stats-info {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin-left: 20px;
+  padding: 0;
+  margin: 0;
+}
+
+@media screen and (max-width: 800px) {
+  .stats {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+}
+@media screen and (max-width: 600px) {
+  .stats {
+    font-size: 1.5rem;
+  }
+}
+@media screen and (max-width: 500px) {
+  .stats {
+    font-size: 1.2rem;
+  }
+}
